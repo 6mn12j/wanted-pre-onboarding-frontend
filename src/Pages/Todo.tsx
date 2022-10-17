@@ -3,8 +3,10 @@ import React from "react";
 const Todo = () => {
   return (
     <>
-      <h1>TODO</h1>
-      <div></div>
+      <h1>TODO List</h1>
+      <div>
+        <input></input>
+      </div>
     </>
   );
 };
