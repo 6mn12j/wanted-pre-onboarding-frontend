@@ -6,10 +6,10 @@ import Signup from "Pages/Signup";
 import Todo from "Pages/Todo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
+import { getjwt } from "utils";
 
 const AppRouter = () => {
-  const isAuth = window.localStorage.getItem("jwt");
-  console.log("router", isAuth);
+  const isAuth = getjwt();
 
   return (
     <BrowserRouter>
