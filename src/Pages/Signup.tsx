@@ -1,14 +1,22 @@
+import React, { useEffect, useState, useContext } from "react";
 import { signup } from "api/user";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { TokenContext } from "context/TokenProvider";
+import { useInput } from "Hooks/useInput";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [, actions] = useContext(TokenContext);
 
   const [disabled, setDisabled] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    props: { value: emailValue, onChange: emailOnchange },
+  } = useInput({ initialValue: "" });
+
+  const {
+    props: { value: passwordValue, onChange: passwordOnChange },
+  } = useInput({ initialValue: "" });
 
   const navigateHome = () => {
     navigate("/");
@@ -17,21 +25,14 @@ const Signup = () => {
   const navigateTodo = () => {
     navigate("/todo");
   };
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setState: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    const value = event.currentTarget.value;
-    setState(value);
-  };
 
   const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      const response = await signup(email, password);
+      const response = await signup(emailValue, passwordValue);
 
       //signup 로직
-      window.localStorage.setItem("jwt", response.data.access_token);
+      actions.setJWT(response.data.access_token);
       window.alert("회원가입을 완료 했습니다.");
       navigateTodo();
     } catch (error) {
@@ -43,31 +44,28 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    if (email.match(/.@./) && password.length > 8) setDisabled(false);
+    if (emailValue.match(/.@./) && passwordValue.length >= 8)
+      setDisabled(false);
     else setDisabled(true);
-  }, [disabled, email, password]);
+  }, [disabled, emailValue, passwordValue]);
 
   return (
     <>
-      <h1>SIGH UP</h1>
+      <h1>SIGN UP</h1>
       <form onSubmit={handleSignup}>
         <input
           id="id"
           type="email"
-          value={email}
-          onChange={(event) => {
-            handleChange(event, setEmail);
-          }}
+          value={emailValue}
+          onChange={emailOnchange}
         ></input>
         <input
           id="password"
           type="password"
           required
           minLength={8}
-          value={password}
-          onChange={(event) => {
-            handleChange(event, setPassword);
-          }}
+          value={passwordValue}
+          onChange={passwordOnChange}
         ></input>
         <button disabled={disabled}>회원가입</button>
       </form>

@@ -8,7 +8,8 @@ export const useInput = ({ initialValue }: { initialValue: string }) => {
     setValue(value);
   };
 
-  useEffect(() => {});
-
-  return { value, onChange };
+  const clearInput = () => {
+    setValue("");
+  };
+  return { props: { value, onChange }, clearInput };
 };

@@ -6,21 +6,15 @@ import Signup from "Pages/Signup";
 import Todo from "Pages/Todo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
-import { getjwt } from "utils";
 
 const AppRouter = () => {
-  const isAuth = getjwt();
-
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
           element={
-            <ProtectedRoute
-              isAllowed={isAuth ? false : true}
-              redirectPath="/todo"
-            >
+            <ProtectedRoute tokenRequired={true} redirectPath="/todo">
               <Signin />
             </ProtectedRoute>
           }
@@ -29,10 +23,7 @@ const AppRouter = () => {
         <Route
           path="/signup"
           element={
-            <ProtectedRoute
-              isAllowed={isAuth ? false : true}
-              redirectPath="/todo"
-            >
+            <ProtectedRoute tokenRequired={true} redirectPath="/todo">
               <Signup />
             </ProtectedRoute>
           }
@@ -40,7 +31,7 @@ const AppRouter = () => {
         <Route
           path="/todo"
           element={
-            <ProtectedRoute isAllowed={isAuth ? true : false} redirectPath="/">
+            <ProtectedRoute tokenRequired={false} redirectPath="/">
               <Todo />
             </ProtectedRoute>
           }
