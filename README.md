@@ -2,9 +2,9 @@
 
 ### 프로젝트 실행 방법
 
-- 1. yarn install
-- 2. yarn start
-- 3. 투두 앱을 사용
+- 1.  `yarn install`
+- 2.  `yarn start`
+- 3.  `투두 앱을 사용`
 
 ### env
 
