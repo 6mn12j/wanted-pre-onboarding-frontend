@@ -12,4 +12,4 @@ REACT_APP_BASE_URL = API_URL
 
 ### 배포 사이트
 
-[링크](https://wanted-pre-onboarding-frontend-qwqu.vercel.app/)
+[배포 링크](https://wanted-pre-onboarding-frontend-qwqu-r8n6yshrj-6mn12j.vercel.app/)
