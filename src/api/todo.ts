@@ -1,14 +1,9 @@
 import { AxiosResponse } from "axios";
 import { TodoType } from "types";
-import { getLocalStorage } from "utils";
 import { instance } from "./base";
 
 export const getTodos = (): Promise<AxiosResponse<TodoType[], any>> => {
-  return instance.get("todos", {
-    headers: {
-      Authorization: `Bearer ${getLocalStorage("jwt")}`,
-    },
-  });
+  return instance.get("todos");
 };
 
 export const updateTodo = ({
@@ -20,35 +15,15 @@ export const updateTodo = ({
   todo: TodoType["todo"];
   isCompleted: TodoType["isCompleted"];
 }) => {
-  return instance.put(
-    `/todos/${id}`,
-    { todo, isCompleted },
-    {
-      headers: {
-        Authorization: `Bearer ${getLocalStorage("jwt")}`,
-      },
-    }
-  );
+  return instance.put(`/todos/${id}`, { todo, isCompleted });
 };
 
 export const deleteTodo = (id: TodoType["id"]) => {
-  return instance.delete(`todos/${id}`, {
-    headers: {
-      Authorization: `Bearer ${getLocalStorage("jwt")}`,
-    },
-  });
+  return instance.delete(`todos/${id}`);
 };
 
 export const createTodo = (
   todo: TodoType["todo"]
 ): Promise<AxiosResponse<TodoType, any>> => {
-  return instance.post(
-    "/todos",
-    { todo },
-    {
-      headers: {
-        Authorization: `Bearer ${getLocalStorage("jwt")}`,
-      },
-    }
-  );
+  return instance.post("/todos", { todo });
 };

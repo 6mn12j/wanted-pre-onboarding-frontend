@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createTodo, deleteTodo, getTodos, updateTodo } from "api/todo";
 import TodoForm from "components/TodoForm";
 import TodoList from "components/TodoList";
 import { useInput } from "Hooks/useInput";
 import { TodoType } from "types";
 import axios from "axios";
+import { AuthContext } from "context/AuthProvider";
 
 const Todo = () => {
   const [todoList, setTodoList] = useState<TodoType[]>([]);
@@ -12,6 +13,7 @@ const Todo = () => {
     props: { value: todoValue, onChange: todoOnchange },
     clearInput,
   } = useInput({ initialValue: "" });
+  const [, actions] = useContext(AuthContext);
 
   const handleCreateTodo = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -98,6 +100,7 @@ const Todo = () => {
     <div className="wrapper">
       <header>
         <h1>TODO List</h1>
+        <button onClick={actions.logout}>로그아웃</button>
       </header>
       <div>
         <TodoForm

@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { signup } from "api/user";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { TokenContext } from "context/TokenProvider";
+import { AuthContext } from "context/AuthProvider";
 import { useInput } from "Hooks/useInput";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [, actions] = useContext(TokenContext);
+  const [, actions] = useContext(AuthContext);
 
   const [disabled, setDisabled] = useState(true);
   const {

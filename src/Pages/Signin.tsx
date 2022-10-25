@@ -4,11 +4,11 @@ import { useInput } from "Hooks/useInput";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { TokenContext } from "context/TokenProvider";
+import { AuthContext } from "context/AuthProvider";
 
 const Signin = () => {
   const navigate = useNavigate();
-  const [, actions] = useContext(TokenContext);
+  const [, actions] = useContext(AuthContext);
   const [isDisabled, setDisabled] = useState(true);
 
   const {
