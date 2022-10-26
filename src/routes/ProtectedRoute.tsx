@@ -5,17 +5,17 @@ import { AuthContext } from "context/AuthProvider";
 
 const ProtectedRoute = ({
   children,
-  tokenRequired,
+  isTokenRequired,
   redirectPath,
 }: {
   children: JSX.Element;
-  tokenRequired: boolean;
+  isTokenRequired: boolean;
   redirectPath: string;
 }) => {
   const [token] = useContext(AuthContext);
   const location = useLocation();
 
-  if (tokenRequired === (token !== null))
+  if (isTokenRequired === (token !== null))
     return <Navigate to={redirectPath} state={{ from: location }} replace />;
   return children;
 };

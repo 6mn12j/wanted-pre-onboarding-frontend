@@ -14,7 +14,7 @@ const AppRouter = () => {
         <Route
           path="/"
           element={
-            <ProtectedRoute tokenRequired={true} redirectPath="/todo">
+            <ProtectedRoute isTokenRequired={true} redirectPath="/todo">
               <Signin />
             </ProtectedRoute>
           }
@@ -23,7 +23,7 @@ const AppRouter = () => {
         <Route
           path="/signup"
           element={
-            <ProtectedRoute tokenRequired={true} redirectPath="/todo">
+            <ProtectedRoute isTokenRequired={true} redirectPath="/todo">
               <Signup />
             </ProtectedRoute>
           }
@@ -31,7 +31,7 @@ const AppRouter = () => {
         <Route
           path="/todo"
           element={
-            <ProtectedRoute tokenRequired={false} redirectPath="/">
+            <ProtectedRoute isTokenRequired={false} redirectPath="/">
               <Todo />
             </ProtectedRoute>
           }

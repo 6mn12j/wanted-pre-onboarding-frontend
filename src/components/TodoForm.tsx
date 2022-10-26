@@ -1,12 +1,11 @@
 import React from "react";
+import { useInput } from "Hooks/useInput";
 
 type TodoFormProps = {
-  todoInput: {
-    value: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  };
+  todoInput: ReturnType<typeof useInput>["props"];
   handleCreateTodo: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 };
+
 const TodoForm = ({ todoInput, handleCreateTodo }: TodoFormProps) => {
   return (
     <div>

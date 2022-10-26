@@ -2,8 +2,12 @@ import { createContext, useMemo, useState } from "react";
 import { getLocalStorage, setLocalStorage } from "utils";
 
 type ContextType = [
-  string | null,
-  { setJWT: (value: string) => void; login: () => void; logout: () => void }
+  value: string | null,
+  actions: {
+    setJWT: (value: string) => void;
+    login: () => void;
+    logout: () => void;
+  }
 ];
 
 export const AuthContext = createContext<ContextType>([
@@ -22,7 +26,6 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
       login() {
         const token = getLocalStorage("jwt");
         setToken(token);
-        setToken(token);
       },
       logout() {
         localStorage.removeItem("jwt");
@@ -32,7 +35,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
     []
   );
 
-  const value: ContextType = useMemo(() => [token, actions], [actions, token]);
+  const value: ContextType = useMemo(() => [token, actions], [token, actions]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
